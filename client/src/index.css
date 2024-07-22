@@ -3,6 +3,7 @@
 body {
   margin: 0;
   font-family: "Poppins", sans-serif;
+  font-size: 0.8em;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   background-color: var(--background-color);
@@ -68,11 +69,22 @@ code {
   flex: 1;
   border-radius: 10px;
   /* margin: 10px; */
+  display: flex;
+  flex-direction: column;
 }
-.right-box {
-  background-color: white;
-
-  width: 15dvw;
-  border-radius: 10px;
-  /* margin: 10px; */
+.graph-container {
+  height: 70%;
+  padding: 20px;
+  /* background-color: #ffb400; */
+}
+.bottom-list {
+  flex: 1;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  padding: 10px;
+}
+.mini-graph {
+  flex: 1;
+  /* background-color: #ffb400; */
 }

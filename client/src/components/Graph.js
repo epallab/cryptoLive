@@ -2,10 +2,10 @@ import React, { useState, useEffect } from "react";
 import ReactApexChart from "react-apexcharts";
 import axios from "axios";
 
-const Graph = () => {
+const Graph = ({ coin }) => {
   const [series, setSeries] = useState([
     {
-      name: "XYZ MOTORS",
+      name: coin,
       data: [],
     },
   ]);
@@ -30,9 +30,19 @@ const Graph = () => {
     markers: {
       size: 0,
     },
+    stroke: {
+      width: 3, // Remove the graph line
+    },
+    grid: {
+      show: false, // Remove the background horizontal lines
+    },
     title: {
-      text: "Stock Price Movement",
+      text: `${coin} Price Movement`,
       align: "left",
+      style: {
+        fontFamily: "inherit",
+        fontWeight: 500,
+      },
     },
     fill: {
       type: "gradient",
@@ -47,15 +57,29 @@ const Graph = () => {
     yaxis: {
       labels: {
         formatter: function (val) {
-          return (val / 1000000).toFixed(0);
+          return (val / 1).toFixed(0);
+        },
+        style: {
+          fontFamily: "inherit",
+          fontWeight: 500,
         },
       },
       title: {
         text: "Price",
+        style: {
+          fontFamily: "inherit",
+          fontWeight: 500,
+        },
       },
     },
     xaxis: {
       type: "datetime",
+      labels: {
+        style: {
+          fontFamily: "inherit",
+          fontWeight: 500,
+        },
+      },
     },
     tooltip: {
       shared: false,
@@ -64,6 +88,10 @@ const Graph = () => {
           return (val / 1).toFixed(0);
         },
       },
+      style: {
+        fontFamily: "inherit",
+        fontWeight: 500,
+      },
     },
   });
 
@@ -71,7 +99,7 @@ const Graph = () => {
     const fetchData = async () => {
       try {
         const response = await axios.get(
-          "http://localhost:8080/api/currency/single/Ethereum"
+          `http://localhost:8080/api/currency/single/${coin}`
         );
         const fetchedData = response.data.map((item) => ({
           x: new Date(item.createdAt).getTime(),
@@ -79,7 +107,7 @@ const Graph = () => {
         }));
         setSeries([
           {
-            name: "Ethereum",
+            name: coin,
             data: fetchedData,
           },
         ]);
@@ -92,24 +120,19 @@ const Graph = () => {
     fetchData();
 
     // Fetch every 5 seconds
-    const intervalId = setInterval(fetchData, 4000);
+    const intervalId = setInterval(fetchData, 5000);
 
     // Cleanup interval on component unmount
     return () => clearInterval(intervalId);
   }, []);
 
   return (
-    <div>
-      <div id="chart">
-        <ReactApexChart
-          options={options}
-          series={series}
-          type="area"
-          height={350}
-        />
-      </div>
-      <div id="html-dist"></div>
-    </div>
+    <ReactApexChart
+      options={options}
+      series={series}
+      type="area"
+      height={"100%"}
+    />
   );
 };
 

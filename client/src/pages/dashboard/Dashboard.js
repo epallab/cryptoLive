@@ -1,5 +1,6 @@
 import React from "react";
 import Graph from "../../components/Graph";
+import MiniGraph from "../../components/MiniGraph";
 
 const Dashboard = () => {
   return (
@@ -7,7 +8,26 @@ const Dashboard = () => {
       <div className="dash-container">
         <div className="left-box"></div>
         <div className="mid-graph">
-          <Graph />
+          <div className="graph-container">
+            <Graph coin={"Bitcoin"} />
+          </div>
+          <div className="bottom-list">
+            <div className="mini-graph">
+              <MiniGraph coin={"Bitcoin"} />
+            </div>
+            <div className="mini-graph">
+              <MiniGraph coin={"Ethereum"} />
+            </div>
+            <div className="mini-graph">
+              <MiniGraph coin={"Tether"} />
+            </div>
+            <div className="mini-graph">
+              <MiniGraph coin={"BNB"} />
+            </div>
+            <div className="mini-graph">
+              <MiniGraph coin={"Solana"} />
+            </div>
+          </div>
         </div>
       </div>
     </div>
