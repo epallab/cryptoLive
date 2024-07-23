@@ -23,7 +23,7 @@ Make sure you have the following installed on your machine:
 1. Clone the repository:
 
     ```bash
-    git clone https://github.com/your-username/your-repo-name.git
+    git clone https://github.com/epallab/cryptoLive.git
     cd your-repo-name
     ```
 
@@ -93,7 +93,4 @@ The server application uses the following environment variables:
 
 Make sure to create a `.env` file in the `server` directory with these variables.
 
-## Project Structure
-
-The project is structured as follows:
 
