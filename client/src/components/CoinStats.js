@@ -35,6 +35,12 @@ const CoinStats = ({ coin }) => {
       <div className="coin-head">
         <img src={coinData?.webp32} alt="" />
         <h2 style={{ color: coinData?.color }}>{coinData?.name}</h2>
+        <div
+          className="coin-rank"
+          style={{ backgroundColor: coinData?.color || "#4285F5" }}
+        >
+          <p> Rank: {coinData?.rank}</p>
+        </div>
       </div>
       <div
         style={{
@@ -56,7 +62,8 @@ const CoinStats = ({ coin }) => {
           <p className="day-change-hour">24h</p>
         </div>
       </div>
-      <p>Rank: {coinData?.rank}</p>
+      <div className="coin-details"></div>
+
       <p>Age: {coinData?.age} days</p>
       <p>All-Time High: ${coinData?.allTimeHighUSD.toLocaleString()}</p>
       <p>Circulating Supply: {coinData?.circulatingSupply.toLocaleString()}</p>

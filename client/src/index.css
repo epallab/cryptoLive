@@ -111,6 +111,18 @@ p {
   display: flex;
   align-items: center;
   gap: 5px;
+  position: relative;
+}
+
+.coin-rank {
+  position: absolute;
+  right: 0;
+  top: 0;
+  color: white;
+  padding: 2px 4px;
+  border-radius: 4px;
+  font-size: 0.8em;
+  font-weight: 600;
 }
 
 .day-change-hour {
@@ -120,4 +132,8 @@ p {
   border-radius: 2px;
   font-size: 0.8em;
   margin-left: 4px;
+}
+
+.coin-details {
+  margin-top: 10px;
 }
