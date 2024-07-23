@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import ReactApexChart from "react-apexcharts";
 import axios from "axios";
+import { getColor } from "./CoinStats";
 
 const MiniGraph = ({ coin }) => {
   const [series, setSeries] = useState([
@@ -49,11 +50,35 @@ const MiniGraph = ({ coin }) => {
     },
   });
 
+  const [coinData, setCoinData] = useState(null);
+
+  useEffect(() => {
+    const fetchCoinData = async () => {
+      try {
+        const response = await axios.get(
+          `http://localhost:8080/api/currency/single/1/${coin}`
+        );
+        setCoinData(response.data[0]); // Assuming the response is an array with a single object
+      } catch (error) {
+        console.error("Error fetching coin data:", error);
+      }
+    };
+
+    // Initial fetch
+    fetchCoinData();
+
+    // Fetch every 5 seconds
+    const intervalId = setInterval(fetchCoinData, 5000);
+
+    // Cleanup interval on component unmount
+    return () => clearInterval(intervalId);
+  }, [coin]);
+
   useEffect(() => {
     const fetchData = async () => {
       try {
         const response = await axios.get(
-          `http://localhost:8080/api/currency/single/${coin}`
+          `http://localhost:8080/api/currency/single/20/${coin}`
         );
         const fetchedData = response.data.map((item) => ({
           x: new Date(item.createdAt).getTime(),
@@ -81,12 +106,39 @@ const MiniGraph = ({ coin }) => {
   }, []);
 
   return (
-    <ReactApexChart
-      options={options}
-      series={series}
-      type="line"
-      height={"100%"}
-    />
+    <>
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "space-between",
+          alignItems: "center",
+          padding: "2px",
+        }}
+      >
+        <h4
+          style={{ color: coinData?.color || "#4285F5", margin: 0, padding: 0 }}
+        >
+          {coinData?.name}
+        </h4>
+        <div className="d-flex">
+          <p
+            style={{
+              color: getColor(coinData?.delta?.day - 1),
+              fontWeight: 600,
+              fontSize: ".8em",
+            }}
+          >
+            {(coinData?.delta?.day - 1).toFixed(2)}% {"(1D)"}
+          </p>
+        </div>
+      </div>
+      <ReactApexChart
+        options={options}
+        series={series}
+        type="line"
+        height={50}
+      />
+    </>
   );
 };
 

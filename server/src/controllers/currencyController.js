@@ -2,11 +2,11 @@ const Currency = require("../models/Currency");
 const { fetchDataForAllCoins } = require("./fetchCoins");
 
 const getSingleCoin = async (req, res) => {
-  const { name } = req.params;
+  const { limit, name } = req.params;
   try {
     const data = await Currency.find({ name })
       .sort({ createdAt: -1 })
-      .limit(20);
+      .limit(limit);
     res.status(200).json(data);
   } catch (error) {
     res.status(500).json({ error: "Error fetching data" });

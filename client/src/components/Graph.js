@@ -36,14 +36,6 @@ const Graph = ({ coin }) => {
     grid: {
       show: false, // Remove the background horizontal lines
     },
-    title: {
-      text: `${coin} Price Movement`,
-      align: "left",
-      style: {
-        fontFamily: "inherit",
-        fontWeight: 500,
-      },
-    },
     fill: {
       type: "gradient",
       gradient: {
@@ -57,7 +49,7 @@ const Graph = ({ coin }) => {
     yaxis: {
       labels: {
         formatter: function (val) {
-          return (val / 1).toFixed(0);
+          return (val / 1).toFixed(2);
         },
         style: {
           fontFamily: "inherit",
@@ -85,7 +77,7 @@ const Graph = ({ coin }) => {
       shared: false,
       y: {
         formatter: function (val) {
-          return (val / 1).toFixed(0);
+          return `$${val.toFixed(2)}`;
         },
       },
       style: {
@@ -99,7 +91,7 @@ const Graph = ({ coin }) => {
     const fetchData = async () => {
       try {
         const response = await axios.get(
-          `http://localhost:8080/api/currency/single/${coin}`
+          `http://localhost:8080/api/currency/single/20/${coin}`
         );
         const fetchedData = response.data.map((item) => ({
           x: new Date(item.createdAt).getTime(),
@@ -111,6 +103,17 @@ const Graph = ({ coin }) => {
             data: fetchedData,
           },
         ]);
+        setOptions((prevOptions) => ({
+          ...prevOptions,
+          title: {
+            text: `${coin} Price Movement`,
+            align: "left",
+            style: {
+              fontFamily: "inherit",
+              fontWeight: 500,
+            },
+          },
+        }));
       } catch (error) {
         console.error("Error fetching data:", error);
       }
@@ -124,7 +127,7 @@ const Graph = ({ coin }) => {
 
     // Cleanup interval on component unmount
     return () => clearInterval(intervalId);
-  }, []);
+  }, [coin]);
 
   return (
     <ReactApexChart
