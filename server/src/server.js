@@ -1,13 +1,16 @@
 const express = require("express");
 const mongoose = require("mongoose");
+const helmet = require("helmet");
 const cors = require("cors");
 require("dotenv").config();
+const path = require("path");
 
 const app = express();
-const port = process.env.PORT || 8080;
+const port = process.env.PORT || 80;
 
 // Middleware
 app.use(cors());
+app.use(helmet());
 app.use(express.json());
 
 // MongoDB connection
@@ -25,8 +28,14 @@ const routes = require("./routes/routes");
 // Use the router
 app.use("/api", routes);
 
-app.get("/", (req, res) => {
-  res.send("Server Running");
+// app.get("/", (req, res) => {
+//   res.send("Server Running");
+// });
+
+app.use(express.static(path.join(__dirname, "../../client/build")));
+
+app.get("*", (req, res) => {
+  res.sendFile(path.join(__dirname, "../../client/build", "index.html"));
 });
 
 // Import and start the periodic fetching of coin data

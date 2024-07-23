@@ -91,7 +91,7 @@ const Graph = ({ coin }) => {
     const fetchData = async () => {
       try {
         const response = await axios.get(
-          `http://localhost:8080/api/currency/single/20/${coin}`
+          `http://localhost:80/api/currency/single/20/${coin}`
         );
         const fetchedData = response.data.map((item) => ({
           x: new Date(item.createdAt).getTime(),

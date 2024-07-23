@@ -8,7 +8,7 @@ const CoinStats = ({ coin }) => {
     const fetchCoinData = async () => {
       try {
         const response = await axios.get(
-          `http://localhost:8080/api/currency/single/1/${coin}`
+          `http://localhost:80/api/currency/single/1/${coin}`
         );
         setCoinData(response.data[0]); // Assuming the response is an array with a single object
       } catch (error) {
