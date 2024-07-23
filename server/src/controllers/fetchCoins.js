@@ -66,7 +66,7 @@ function fetchDataForAllCoins() {
 
 // Function to start the periodic fetching using node-cron
 function startFetchingData() {
-  // Schedule the task to run every 20 seconds
+  // Schedule the task to run every 10 seconds
   cron.schedule("*/10 * * * * *", () => {
     fetchDataForAllCoins();
   });
