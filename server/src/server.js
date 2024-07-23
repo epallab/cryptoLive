@@ -40,7 +40,7 @@ app.get("*", (req, res) => {
 
 // Import and start the periodic fetching of coin data
 const { startFetchingData } = require("./controllers/fetchCoins");
-// startFetchingData();
+startFetchingData();
 
 app.listen(port, () => {
   console.log(`Server running on port ${port}`);
