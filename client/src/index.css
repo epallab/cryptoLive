@@ -136,4 +136,34 @@ p {
 
 .coin-details {
   margin-top: 10px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  align-items: center;
+  margin: 20px 0px;
+}
+
+.coin-details-box {
+  flex: 0 0 40%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 5px;
+  border-radius: 5px;
+  margin: 1%;
+}
+
+.coin-details-box > p:nth-child(1) {
+  font-size: 0.8em;
+  font-weight: 500;
+}
+.coin-details-box > p:nth-child(2) {
+  font-size: 0.6em;
+  font-weight: 500;
+  color: #676565;
+}
+.coin-links {
+  font-size: 0.8em;
+  font-weight: 500;
 }

@@ -62,27 +62,61 @@ const CoinStats = ({ coin }) => {
           <p className="day-change-hour">24h</p>
         </div>
       </div>
-      <div className="coin-details"></div>
-
-      <p>Age: {coinData?.age} days</p>
-      <p>All-Time High: ${coinData?.allTimeHighUSD.toLocaleString()}</p>
-      <p>Circulating Supply: {coinData?.circulatingSupply.toLocaleString()}</p>
-      <p>Total Supply: {coinData?.totalSupply.toLocaleString()}</p>
-      {coinData?.maxSupply && (
-        <p>Max Supply: {coinData?.maxSupply.toLocaleString()}</p>
-      )}
-      <p>Exchanges: {coinData?.exchanges}</p>
-      <p>Markets: {coinData?.markets}</p>
-      <p>Pairs: {coinData?.pairs}</p>
-      <p>Categories: {coinData?.categories.join(", ")}</p>
-      <div className="coin-links">
-        {coinData?.links.website && (
-          <a href={coinData?.links.website}>Website : </a>
+      <div className="coin-details">
+        <div className="coin-details-box">
+          <p>{coinData?.age} days</p>
+          <p>Age</p>
+        </div>
+        <div className="coin-details-box">
+          <p>${coinData?.allTimeHighUSD.toLocaleString()}</p>
+          <p>All-Time High</p>
+        </div>
+        <div className="coin-details-box">
+          <p>{coinData?.circulatingSupply.toLocaleString()}</p>
+          <p>Circulating Supply</p>
+        </div>
+        <div className="coin-details-box">
+          <p>{coinData?.totalSupply.toLocaleString()}</p>
+          <p>Total Supply</p>
+        </div>
+        {coinData?.maxSupply && (
+          <div className="coin-details-box">
+            <p> {coinData?.maxSupply.toLocaleString()}</p>
+            <p>Max Supply:</p>
+          </div>
         )}
+        <div className="coin-details-box">
+          <p>{coinData?.exchanges}</p>
+          <p>Exchanges</p>
+        </div>
+        <div className="coin-details-box">
+          <p> {coinData?.markets}</p>
+          <p>Markets</p>
+        </div>
+        <div className="coin-details-box">
+          <p>{coinData?.pairs}</p>
+          <p>Pairs</p>
+        </div>
+        <div className="coin-details-box">
+          <p>{coinData?.cap}</p>
+          <p>Cap</p>
+        </div>
+        <div className="coin-details-box">
+          <p>{coinData?.volume}</p>
+          <p>Volume</p>
+        </div>
+        <div className="coin-details-box">
+          <p>{coinData?.liquidity}</p>
+          <p>liquidity</p>
+        </div>
+      </div>
+      <p style={{ fontSize: ".8em" }}>
+        Categories: {coinData?.categories.join(", ")}
+      </p>
+      <div className="coin-links">
         {coinData?.links.whitepaper && (
           <a href={coinData?.links.whitepaper}>Whitepaper</a>
         )}
-        {/* Add other links as necessary */}
       </div>
     </div>
   );
